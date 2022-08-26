@@ -3,8 +3,9 @@ package me.rezapour.sixttask.data.network.networkmapper
 import me.rezapour.sixttask.data.network.model.CarsNetworkEntity
 import me.rezapour.sixttask.model.Car
 import me.rezapour.sixttask.utils.Mapper
+import javax.inject.Inject
 
-class CarDataMapper : Mapper<CarsNetworkEntity, Car> {
+class CarDataMapper @Inject constructor() : Mapper<CarsNetworkEntity, Car> {
     override fun entityToDomain(entity: CarsNetworkEntity): Car {
         return Car(
             id = entity.id,
