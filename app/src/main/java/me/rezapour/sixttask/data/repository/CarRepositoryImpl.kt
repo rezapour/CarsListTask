@@ -26,7 +26,7 @@ class CarRepositoryImpl constructor(
 
             emit(result)
         } catch (e: Exception) {
-            emit(DataState.Error("Internet Error Problem"))
+            emit(DataState.Error(e.message.toString()))
         }
     }
 }
