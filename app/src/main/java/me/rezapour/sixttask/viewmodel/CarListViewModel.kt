@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import me.rezapour.sixttask.utils.DataProviderException
 import me.rezapour.sixttask.data.repository.CarsRepository
 import me.rezapour.sixttask.model.Car
 import me.rezapour.sixttask.utils.DataState
@@ -21,8 +22,14 @@ class CarListViewModel @Inject constructor(private val repository: CarsRepositor
     fun loadData() {
         _carDataState.value = DataState.Loading
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getCars().collect() { dataState ->
-                _carDataState.postValue(dataState)
+            try {
+                repository.getCars().collect() { cars ->
+                    _carDataState.postValue(DataState.Success(cars))
+                }
+            } catch (e: DataProviderException) {
+                _carDataState.postValue(DataState.Error(e.messageId))
+            } catch (e: Exception) {
+                _carDataState.postValue(DataState.DefaultError)
             }
         }
     }
