@@ -48,9 +48,10 @@ class CarListFragment : Fragment() {
     private fun subscribeToViewMode() {
         viewModel.carDataState.observe(viewLifecycleOwner) { dataState ->
             when (dataState) {
-                is DataState.Error -> onError(dataState.message)
+                is DataState.Error -> onError(dataState.messageId)
                 DataState.Loading -> loading(true)
                 is DataState.Success -> onSuccess(dataState.data)
+                DataState.DefaultError -> onError(R.string.error_default_message)
             }
         }
     }
@@ -77,12 +78,11 @@ class CarListFragment : Fragment() {
         adapter.addItem(posts)
         adapter.notifyDataSetChanged()
 
-
     }
 
-    private fun onError(message: String) {
+    private fun onError(messageId: Int) {
         loading(false)
-        snackBar(message)
+        snackBar(messageId)
     }
 
 
@@ -90,8 +90,8 @@ class CarListFragment : Fragment() {
         swiper.isRefreshing = isLoading
     }
 
-    private fun snackBar(message: String) {
-        Snackbar.make(binding.coordinatorlayoutCarList, message, Snackbar.LENGTH_LONG).show();
+    private fun snackBar(messageId: Int) {
+        Snackbar.make(binding.coordinatorlayoutCarList, messageId, Snackbar.LENGTH_LONG).show();
     }
 
 

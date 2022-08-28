@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.carlist.CarListFragment"
-    android:id="@+id/coordinatorlayoutCarList">
+    android:id="@+id/coordinatorlayoutCarList"
+    >
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swiperLayout"

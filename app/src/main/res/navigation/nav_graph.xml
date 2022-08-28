@@ -9,7 +9,11 @@
         android:id="@+id/mapsFragment"
         android:name="me.rezapour.sixttask.view.map.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_carListFragment"
+            app:destination="@id/carListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/carListFragment"
         android:name="me.rezapour.sixttask.view.carlist.CarListFragment"
