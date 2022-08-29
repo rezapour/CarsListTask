@@ -24,6 +24,7 @@ class CarListAdapter(private val carList: ArrayList<Car>) :
         private val transmissionType: TextView = binding.txtTransmissionType
         private val fullType: TextView = binding.txtFuelType
         private val color: TextView = binding.txtColor
+        private val fuelTypeImage: ImageView = binding.imageviewFuelType
 
 
         fun onBind(car: Car) {
@@ -32,14 +33,17 @@ class CarListAdapter(private val carList: ArrayList<Car>) :
                 .error(R.drawable.ic_baseline_broken_image_24)
                 .into(carImage);
 
-            carName.text = "${car.make} ${car.name}"
+            carName.text = car.modelName
             platNumber.text = car.licensePlate
-            val level = car.fuelLevel * 100
-            fullLevel.text = "$level %"
-            transmissionType.text = if (car.transmission == "M") "Manual" else "Automatic"
-            fullType.text = if (car.fuelType == "D") "Diesel" else "Electric"
-            color.text = car.color.replace("_", " ").capitalize()
+            fullLevel.text = "${car.fuelLevel} %"
+            transmissionType.text = car.transmission
+            fullType.text = car.fuelType
+            color.text = car.color
+            fuelTypeImage.setImageResource(mapFuelLevelIcon(car.fuelType))
         }
+
+        private fun mapFuelLevelIcon(fuelType: String) =
+            if (fuelType == "Diesel") R.drawable.ic_baseline_local_gas_station_24 else R.drawable.ic_baseline_battery_full_24
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
