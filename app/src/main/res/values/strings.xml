@@ -8,4 +8,8 @@
     <string name="error_server_error">Failed to connect to server. Please try again.</string>
     <string name="error_default_message">Something went wrong!</string>
 
+    <string name="error_setting_failed">Gps setting is not availAblePlease turn on your Gps manually.</string>
+    <string name="error_gps_not_permitted">"We need location permission for better user experience in the app.</string>
+    <string name="error_gps_turn_on_response_no">"Please turn on your Gps for better experience.</string>
+
 </resources>
