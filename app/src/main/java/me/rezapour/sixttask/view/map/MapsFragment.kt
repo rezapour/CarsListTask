@@ -21,7 +21,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.SettingsClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -46,7 +48,6 @@ class MapsFragment : Fragment() {
     private val viewModel: CarListViewModel by viewModels()
     private lateinit var map: GoogleMap
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var btnAvailableCars: Button
     private lateinit var navController: NavController
     private lateinit var resolutionForResult: ActivityResultLauncher<IntentSenderRequest>
@@ -61,7 +62,7 @@ class MapsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -115,7 +116,7 @@ class MapsFragment : Fragment() {
     private fun addLocationsToMap(listcars: List<Car>) {
         for (car: Car in listcars) {
             val carsPoint = LatLng(car.latitude, car.longitude)
-            addPointsOnMap(carsPoint, car.name)
+            addPointsOnMap(carsPoint, car.modelName)
         }
         val point = LatLng(48.181227, 11.512796)
         changeMapCameraPosition(point)
