@@ -23,6 +23,8 @@ class NetworkDataProviderImpl(private val api: ApiService, private val mapper: C
                 throw DataProviderException(ExceptionMapper.toApiCallErrorMessage(response.code()))
 
         } catch (e: Exception) {
+            if (e is DataProviderException)
+                throw e
             throw DataProviderException(ExceptionMapper.toInternetConnectionError())
         }
     }

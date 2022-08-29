@@ -36,7 +36,13 @@ class CarDataMapper @Inject constructor() {
     private fun mapTransmissionType(transmissionType: String) =
         if (transmissionType == "M") "Manual" else "Automatic"
 
-    private fun mapFuelType(fuelType: String) = if (fuelType == "D") "Diesel" else "Electric"
+    private fun mapFuelType(fuelType: String) = when (fuelType) {
+        "D" -> "Diesel"
+        "E" -> "Electric"
+        "P" -> "Petrol"
+        else -> "Diesel"
+    }
+
 
     private fun mapColor(color: String) = color.replace("_", " ").capitalize()
 
