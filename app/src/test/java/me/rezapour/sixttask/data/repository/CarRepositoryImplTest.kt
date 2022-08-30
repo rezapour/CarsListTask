@@ -1,22 +1,19 @@
 package me.rezapour.sixttask.data.repository
 
+import app.cash.turbine.test
+import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
 import me.rezapour.mytask.util.MainCoroutineRule
 import me.rezapour.sixttask.data.network.NetworkDataProvider
 import me.rezapour.sixttask.model.Car
+import me.rezapour.sixttask.utils.DataProviderException
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.kotlin.whenever
-import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.flow.flow
-import me.rezapour.sixttask.utils.DataProviderException
-import org.junit.Assert
 import org.mockito.Mockito
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.times
+import org.mockito.kotlin.whenever
 
 
 class CarRepositoryImplTest {

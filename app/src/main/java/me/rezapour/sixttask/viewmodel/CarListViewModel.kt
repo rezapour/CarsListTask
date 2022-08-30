@@ -21,7 +21,7 @@ class CarListViewModel @Inject constructor(private val repository: CarsRepositor
 
     fun loadData() {
         _carDataState.value = DataState.Loading
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             try {
                 repository.getCars().collect() { cars ->
                     _carDataState.postValue(DataState.Success(cars))
