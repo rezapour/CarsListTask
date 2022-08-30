@@ -1,6 +1,7 @@
 # Task
 
-This is a simple app that load list of cars from api and shows them in a List and Map
+This is a simple app that load list of cars from api and shows them in a List and Map. For running
+the application you need an google map api key.
 
 ### Dependencies
 
