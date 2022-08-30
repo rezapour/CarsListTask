@@ -69,7 +69,6 @@ class MapsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
-
         navController = Navigation.findNavController(view)
     }
 
@@ -118,8 +117,6 @@ class MapsFragment : Fragment() {
             val carsPoint = LatLng(car.latitude, car.longitude)
             addPointsOnMap(carsPoint, car.modelName)
         }
-        val point = LatLng(48.181227, 11.512796)
-        changeMapCameraPosition(point)
     }
 
     private fun addPointsOnMap(latlong: LatLng, name: String) {
@@ -159,12 +156,13 @@ class MapsFragment : Fragment() {
     }
 
     @SuppressLint("MissingPermission")
-    private fun configMap() {
+    private fun turnOnInMyLocationEnable() {
         map.isMyLocationEnabled = true
-        map.uiSettings.isMyLocationButtonEnabled = true
+
     }
 
     private fun useMap() {
+        map.uiSettings.isMyLocationButtonEnabled = true
         if (checkGpsPermission()) {
             checkGps()
         } else {
@@ -174,7 +172,7 @@ class MapsFragment : Fragment() {
 
     private fun checkGps() {
         if (checkGpsStatus(requireActivity())) {
-            configMap()
+            turnOnInMyLocationEnable()
         } else {
             turnOnGps()
         }
@@ -227,16 +225,12 @@ class MapsFragment : Fragment() {
             interval = 10000
             fastestInterval = 1000 / 2
         }
-
         val locationSettingRequestBuilder = LocationSettingsRequest.Builder().apply {
             addLocationRequest(locationRegest)
             setAlwaysShow(true)
         }
-
         val settingClient: SettingsClient = LocationServices.getSettingsClient(requireActivity())
-
         val task = settingClient.checkLocationSettings(locationSettingRequestBuilder.build())
-
         task.addOnFailureListener { e ->
             try {
                 if (e is ResolvableApiException) {
@@ -244,7 +238,6 @@ class MapsFragment : Fragment() {
                     resolutionForResult.launch(intentSenderRequest)
                 } else
                     snackBar(R.string.error_setting_failed)
-
             } catch (e: Exception) {
                 snackBar(R.string.error_setting_failed)
             }

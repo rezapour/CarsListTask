@@ -128,8 +128,8 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/farro"
             android:gravity="center_horizontal"
-            android:text=""
             android:maxLines="3"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="10sp"
             android:textStyle="bold" />

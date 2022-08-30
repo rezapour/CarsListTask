@@ -43,7 +43,7 @@ class CarListAdapter(private val carList: ArrayList<Car>) :
         }
 
         private fun mapFuelLevelIcon(fuelType: String) =
-            if (fuelType == "Diesel") R.drawable.ic_baseline_local_gas_station_24 else R.drawable.ic_baseline_battery_full_24
+            if (fuelType == "Electric") R.drawable.ic_baseline_battery_full_24 else R.drawable.ic_baseline_local_gas_station_24
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
