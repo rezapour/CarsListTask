@@ -209,7 +209,6 @@ class MapsFragment : Fragment() {
     private fun gpsResponse() {
         resolutionForResult =
             registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { activityResult ->
-                Log.d("testGPS", "${activityResult.resultCode}")
                 if (activityResult.resultCode == -1)
                     useMap()
                 else {
